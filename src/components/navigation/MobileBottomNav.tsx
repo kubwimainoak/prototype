@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 
 type NavItem = {
   label: string;
@@ -9,7 +9,7 @@ type NavItem = {
   path: string;
 }
 
-export default function MobileBottomNav() {
+function MobileBottomNavContent() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -98,5 +98,25 @@ export default function MobileBottomNav() {
         ))}
       </nav>
     </div>
+  );
+}
+
+export default function MobileBottomNav() {
+  return (
+    <Suspense fallback={
+      <div className="fixed bg-[#152B59] bg-opacity-10 bottom-0 left-0 right-0 border-t border-[#152B59]/20 shadow-lg z-50">
+        <nav className="flex justify-around">
+          {/* Loading placeholders */}
+          {[1, 2, 3, 4].map((item) => (
+            <div key={item} className="flex flex-col items-center py-3 px-4">
+              <div className="w-6 h-6 bg-white/20 rounded-md"></div>
+              <div className="mt-1 w-12 h-3 bg-white/20 rounded-md"></div>
+            </div>
+          ))}
+        </nav>
+      </div>
+    }>
+      <MobileBottomNavContent />
+    </Suspense>
   );
 } 

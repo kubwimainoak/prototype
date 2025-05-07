@@ -5,10 +5,7 @@ import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter
+  CardContent
 } from "@/components/ui/card";
 import {
   Dialog,
@@ -26,7 +23,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 // Mock match data
@@ -338,8 +334,8 @@ export default function MatchesTab() {
         <section>
           {upcomingMatches.length === 0 ? (
             <Card className="text-center">
-              <CardContent className="p-3">
-                <p className="text-sm text-[#333333]">You don't have any upcoming matches scheduled.</p>
+              <CardContent className="px-3">
+                <p className="text-sm text-[#333333]">You don&apos;t have any upcoming matches scheduled.</p>
                 <Link href="/dashboard" className="mt-2 inline-block text-xs text-[#152B59] underline">Find a league to join</Link>
               </CardContent>
             </Card>
@@ -385,7 +381,7 @@ export default function MatchesTab() {
           {pendingMatches.length === 0 ? (
             <Card className="text-center">
               <CardContent className="px-3">
-                <p className="text-sm text-[#333333]">You don't have any matches requiring action.</p>
+                <p className="text-sm text-[#333333]">You don&apos;t have any matches requiring action.</p>
               </CardContent>
             </Card>
           ) : (
@@ -447,7 +443,7 @@ export default function MatchesTab() {
           {completedMatches.length === 0 ? (
             <Card className="text-center">
               <CardContent className="px-3">
-                <p className="text-sm text-[#333333]">You don't have any completed matches yet.</p>
+                <p className="text-sm text-[#333333]">You don&apos;t have any completed matches yet.</p>
               </CardContent>
             </Card>
           ) : (

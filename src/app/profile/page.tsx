@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { Button } from "@/components/ui/button";
 import {
   Tabs,
@@ -25,7 +25,7 @@ import {
   DialogFooter
 } from "@/components/ui/dialog";
 
-export default function ProfilePage() {
+function ProfilePageContent() {
   // State for time slots
   const [selectedTimeSlots, setSelectedTimeSlots] = useState<string[]>([]);
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
@@ -88,8 +88,6 @@ export default function ProfilePage() {
         <p className="text-xs text-[#D6AD60]/80 mt-0.5">Manage your chess player profile</p>
       </div>
       <div className="container mx-auto max-w-6xl px-4">
-      
-        
         
         <Tabs defaultValue="general" className="mb-6">
           <TabsList className="w-full border border-[#152B59]/20 bg-[#152B59]/5 rounded-md">
@@ -397,5 +395,17 @@ export default function ProfilePage() {
         </Tabs>
       </div>
     </div>
+  );
+}
+
+export default function ProfilePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-[#0f1f40]/10 via-[#152B59]/20 to-[#1a3573]/10 pb-20 flex justify-center items-center">
+        <div className="text-[#152B59] text-lg font-medium">Loading profile...</div>
+      </div>
+    }>
+      <ProfilePageContent />
+    </Suspense>
   );
 } 

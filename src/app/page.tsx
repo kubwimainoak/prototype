@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 
 export default function LoginPage() {
   return (
@@ -67,8 +66,8 @@ export default function LoginPage() {
               <div className="text-sm">
                 <a href="#" className="font-medium text-[#152B59] hover:underline">
                   Forgot your password?
-          </a>
-        </div>
+                </a>
+              </div>
             </div>
 
             <div>
@@ -113,11 +112,8 @@ export default function LoginPage() {
           </div>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-[#333333]/60">
-              Don't have an account?{' '}
-              <Link href="/register" className="font-medium text-[#152B59] hover:underline">
-                Register now
-              </Link>
+            <p className="text-sm text-[#333333]/70">
+              Don&apos;t have an account? <Link href="/register" className="text-[#152B59] underline">Register here</Link>
             </p>
           </div>
         </div>
