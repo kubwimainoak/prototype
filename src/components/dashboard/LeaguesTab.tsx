@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 import {
   Card,
   CardHeader,
@@ -157,6 +159,7 @@ function isRegistrationOpen(closeDate: string) {
 
 export default function LeaguesTab() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [openLeagueId, setOpenLeagueId] = useState<number | null>(null);
   
   // Filter functions
   const activeLeagues = leagues.filter(league => league.status === "active");
@@ -173,10 +176,24 @@ export default function LeaguesTab() {
     );
   };
   
+  // Handle joining a league
+  const handleJoinLeague = (league: typeof leagues[0]) => {
+    // Close the modal
+    setOpenLeagueId(null);
+    
+    // Show success toast
+    toast.success(`Joined ${league.name}`, {
+      description: `You've successfully joined the league. Your division will be assigned based on your rating.`
+    });
+  };
+  
   // League details modal
   const LeagueDetailsModal = ({ league }: { league: typeof leagues[0] }) => {
     return (
-      <Dialog>
+      <Dialog open={openLeagueId === league.id} onOpenChange={(open) => {
+        if (!open) setOpenLeagueId(null);
+        else setOpenLeagueId(league.id);
+      }}>
         <DialogTrigger asChild>
           <Button variant="navyOutline" size="sm">
             View Details
@@ -309,11 +326,16 @@ export default function LeaguesTab() {
           </Tabs>
           
           <DialogFooter className="mt-6">
-            {league.registration_open && (
-              <Button variant="navy" size="sm" asChild>
-                <Link href={`/leagues/${league.id}/join`}>
-                  Join League
-                </Link>
+            {league.registration_open ? (
+              <Button 
+                variant="navy" 
+                onClick={() => handleJoinLeague(league)}
+              >
+                Join League
+              </Button>
+            ) : (
+              <Button variant="outline" disabled>
+                Registration Closed
               </Button>
             )}
             <Button variant="navyOutline" size="sm" asChild>
@@ -365,13 +387,7 @@ export default function LeaguesTab() {
         <div className="flex gap-2">
           <LeagueDetailsModal league={league} />
           
-          {league.registration_open && (
-            <Button variant="navy" size="sm" asChild>
-              <Link href={`/leagues/${league.id}/join`}>
-                Join League
-              </Link>
-            </Button>
-          )}
+          
         </div>
       </CardFooter>
     </Card>
@@ -379,6 +395,7 @@ export default function LeaguesTab() {
 
   return (
     <div>
+      <Toaster />
       {/* Search */}
       <div className="mb-4">
         <div className="relative">

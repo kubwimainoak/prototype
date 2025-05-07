@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,6 +18,12 @@ import {
   DialogFooter
 } from "@/components/ui/dialog";
 import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent
+} from "@/components/ui/tabs";
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -24,6 +31,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { Toaster } from "@/components/ui/sonner";
 
 // Mock match data
 const matches = [
@@ -155,20 +163,46 @@ function formatDateAndTime(dateString: string | null) {
   return new Date(dateString).toLocaleDateString('en-US', options);
 }
 
-type MatchSubTabType = 'upcoming' | 'pending' | 'completed';
-
 export default function MatchesTab() {
-  const [activeSubTab, setActiveSubTab] = useState<MatchSubTabType>('upcoming');
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<string>("");
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<string>("");
+  const [selectedVenue, setSelectedVenue] = useState<string>("");
   
   // Group matches by status
   const upcomingMatches = matches.filter(match => match.status === 'scheduled');
   const pendingMatches = matches.filter(match => ['pending', 'pending_confirmation', 'pending_result'].includes(match.status));
   const completedMatches = matches.filter(match => match.status === 'completed');
 
+  const handleBookMatch = () => {
+    // Form validation
+    if (!selectedPlayer || !selectedTimeSlot || !selectedVenue) {
+      toast.error("Please fill in all fields", {
+        description: "Player, time slot, and venue are required to book a match."
+      });
+      return;
+    }
+    
+    // Close dialog and show success message
+    setIsBookingModalOpen(false);
+    
+    // Get player details for the toast message
+    const player = playerAvailability[selectedPlayer as keyof typeof playerAvailability];
+    
+    // Show success toast
+    toast.success("Match booked successfully", {
+      description: `Your match with ${player.name} is scheduled for ${selectedTimeSlot} at ${selectedVenue}.`
+    });
+    
+    // Reset form
+    setSelectedPlayer("");
+    setSelectedTimeSlot("");
+    setSelectedVenue("");
+  };
+
   return (
     <div>
+      <Toaster />
       {/* Header with Book Match button */}
       <div className="flex justify-between items-center mb-4">
         <div className="hidden sm:block">
@@ -216,13 +250,13 @@ export default function MatchesTab() {
                   <Label htmlFor="timeSlot" className="text-right">
                     Time Slot
                   </Label>
-                  <Select>
+                  <Select onValueChange={(value) => setSelectedTimeSlot(value)}>
                     <SelectTrigger className="col-span-3">
                       <SelectValue placeholder="Select available time" />
                     </SelectTrigger>
                     <SelectContent>
                       {playerAvailability[selectedPlayer as keyof typeof playerAvailability].availableSlots.map((slot, index) => (
-                        <SelectItem key={index} value={`${slot.day}-${slot.time}`}>
+                        <SelectItem key={index} value={`${slot.day} at ${slot.time}`}>
                           {slot.day} at {slot.time}
                         </SelectItem>
                       ))}
@@ -265,7 +299,7 @@ export default function MatchesTab() {
                 <Label htmlFor="venue" className="text-right">
                   Venue
                 </Label>
-                <Select>
+                <Select onValueChange={(value) => setSelectedVenue(value)}>
                   <SelectTrigger className="col-span-3">
                     <SelectValue placeholder="Select venue" />
                   </SelectTrigger>
@@ -283,7 +317,7 @@ export default function MatchesTab() {
               <Button variant="outline" onClick={() => setIsBookingModalOpen(false)}>
                 Cancel
               </Button>
-              <Button variant="navy" onClick={() => setIsBookingModalOpen(false)}>
+              <Button variant="navy" onClick={handleBookMatch}>
                 Book Match
               </Button>
             </DialogFooter>
@@ -292,46 +326,30 @@ export default function MatchesTab() {
       </div>
 
       {/* Match Tabs */}
-      <div className="mb-4">
-        <div className="border-b w-full border-[#152B59]/20">
-          <nav className="flex -mb-px w-full justify-between">
-            <button
-              onClick={() => setActiveSubTab('upcoming')}
-              className={`py-2 px-3 text-xs font-medium border-b-2 ${
-                activeSubTab === 'upcoming'
-                  ? 'text-[#152B59] border-[#152B59]'
-                  : 'text-[#333333] border-transparent hover:text-[#152B59] hover:border-[#152B59]/40'
-              }`}
-            >
-              Upcoming ({upcomingMatches.length})
-            </button>
-            <button
-              onClick={() => setActiveSubTab('pending')}
-              className={`py-2 px-3 text-xs font-medium border-b-2 ${
-                activeSubTab === 'pending'
-                  ? 'text-[#152B59] border-[#152B59]'
-                  : 'text-[#333333] border-transparent hover:text-[#152B59] hover:border-[#152B59]/40'
-              }`}
-            >
-              Pending ({pendingMatches.length})
-            </button>
-            <button
-              onClick={() => setActiveSubTab('completed')}
-              className={`py-2 px-3 text-xs font-medium border-b-2 ${
-                activeSubTab === 'completed'
-                  ? 'text-[#152B59] border-[#152B59]'
-                  : 'text-[#333333] border-transparent hover:text-[#152B59] hover:border-[#152B59]/40'
-              }`}
-            >
-              Completed ({completedMatches.length})
-            </button>
-          </nav>
-        </div>
-      </div>
-
-      {/* Upcoming Matches */}
-      {activeSubTab === 'upcoming' && (
-        <section>
+      <Tabs defaultValue="upcoming" className="mb-6">
+        <TabsList className="w-full border border-[#152B59]/20 bg-[#152B59]/5 rounded-md">
+          <TabsTrigger 
+            value="upcoming"
+            className="data-[state=active]:bg-white data-[state=active]:text-[#152B59] data-[state=active]:shadow-none"
+          >
+            Upcoming ({upcomingMatches.length})
+          </TabsTrigger>
+          <TabsTrigger 
+            value="pending" 
+            className="data-[state=active]:bg-white data-[state=active]:text-[#152B59] data-[state=active]:shadow-none"
+          >
+            Pending ({pendingMatches.length})
+          </TabsTrigger>
+          <TabsTrigger 
+            value="completed" 
+            className="data-[state=active]:bg-white data-[state=active]:text-[#152B59] data-[state=active]:shadow-none"
+          >
+            Completed ({completedMatches.length})
+          </TabsTrigger>
+        </TabsList>
+        
+        {/* Upcoming Matches */}
+        <TabsContent value="upcoming" className="mt-4">
           {upcomingMatches.length === 0 ? (
             <Card className="text-center">
               <CardContent className="px-3">
@@ -372,12 +390,10 @@ export default function MatchesTab() {
               ))}
             </div>
           )}
-        </section>
-      )}
-
-      {/* Pending Matches */}
-      {activeSubTab === 'pending' && (
-        <section>
+        </TabsContent>
+        
+        {/* Pending Matches */}
+        <TabsContent value="pending" className="mt-4">
           {pendingMatches.length === 0 ? (
             <Card className="text-center">
               <CardContent className="px-3">
@@ -434,12 +450,10 @@ export default function MatchesTab() {
               ))}
             </div>
           )}
-        </section>
-      )}
-
-      {/* Completed Matches */}
-      {activeSubTab === 'completed' && (
-        <section>
+        </TabsContent>
+        
+        {/* Completed Matches */}
+        <TabsContent value="completed" className="mt-4">
           {completedMatches.length === 0 ? (
             <Card className="text-center">
               <CardContent className="px-3">
@@ -469,8 +483,8 @@ export default function MatchesTab() {
               ))}
             </div>
           )}
-        </section>
-      )}
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

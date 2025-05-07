@@ -2,6 +2,8 @@
 
 import { useState, Suspense } from 'react';
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 import {
   Tabs,
   TabsList,
@@ -81,8 +83,16 @@ function ProfilePageContent() {
     return selectedTimeSlots.includes(`${selectedDay}-${slot}`);
   };
   
+  const handleSaveAvailability = () => {
+    // Simulate saving
+    toast.success("Availability saved successfully", {
+      description: `Saved ${selectedTimeSlots.length} time slots across ${new Set(selectedTimeSlots.map(slot => slot.split('-')[0])).size} days.`
+    });
+  };
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0f1f40]/10 via-[#152B59]/20 to-[#1a3573]/10 pb-20">
+      <Toaster />
       <div className="mb-4 w-full bg-[#152B59] p-4">
         <h1 className="text-xl font-bold text-[#D6AD60]">Profile</h1>
         <p className="text-xs text-[#D6AD60]/80 mt-0.5">Manage your chess player profile</p>
@@ -102,6 +112,12 @@ function ProfilePageContent() {
               className="data-[state=active]:bg-white data-[state=active]:text-[#152B59] data-[state=active]:shadow-none"
             >
               Schedule
+            </TabsTrigger>
+            <TabsTrigger 
+              value="subscription" 
+              className="data-[state=active]:bg-white data-[state=active]:text-[#152B59] data-[state=active]:shadow-none"
+            >
+              Subscription
             </TabsTrigger>
           </TabsList>
           
@@ -314,7 +330,7 @@ function ProfilePageContent() {
                       </div>
                       
                       <div className="mt-4 flex justify-end">
-                        <Button variant="navy">
+                        <Button variant="navy" onClick={handleSaveAvailability}>
                           Save Availability
                         </Button>
                       </div>
@@ -387,6 +403,115 @@ function ProfilePageContent() {
                         </DialogFooter>
                       </DialogContent>
                     </Dialog>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          {/* Subscription Tab */}
+          <TabsContent value="subscription" className="mt-4">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg font-bold text-[#152B59]">My Subscription</CardTitle>
+                <CardDescription>
+                  Manage your subscription plan and payment details
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {/* Current Plan Section */}
+                <div className="mb-6">
+                  <h3 className="text-sm font-medium text-[#152B59] mb-2">Current Plan</h3>
+                  <div className="bg-[#152B59]/5 p-3 rounded-md">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <h4 className="font-semibold text-[#152B59]">Premium Membership</h4>
+                        <p className="text-xs text-[#333333]/70 mt-0.5">Billed annually</p>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-semibold text-[#152B59]">R599 / year</div>
+                        <p className="text-xs text-[#4CAF50]">Active</p>
+                      </div>
+                    </div>
+                    <div className="flex mt-3 text-xs">
+                      <span className="inline-flex items-center text-[#333333]/70">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        Renewal: May 15, 2024
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Plan Benefits */}
+                <div className="mb-6">
+                  <h3 className="text-sm font-medium text-[#152B59] mb-2">Membership Benefits</h3>
+                  <ul className="space-y-2">
+                    {['Unlimited league entries', 'Priority tournament registration', 'No booking fees for matches', 'Advanced player statistics'].map((benefit, index) => (
+                      <li key={index} className="flex text-sm items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#4CAF50] mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        {benefit}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                {/* Payment Methods */}
+                <div className="mb-6">
+                  <h3 className="text-sm font-medium text-[#152B59] mb-2">Payment Method</h3>
+                  <div className="border border-[#152B59]/10 p-3 rounded-md">
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center">
+                        <div className="w-10 h-6 bg-[#152B59]/10 rounded-md flex items-center justify-center mr-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#152B59]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-medium">Visa ending in 4242</h4>
+                          <p className="text-xs text-[#333333]/70">Expires: 05/25</p>
+                        </div>
+                      </div>
+                      <Button variant="outline" size="sm">
+                        Change
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Billing History */}
+                <div>
+                  <h3 className="text-sm font-medium text-[#152B59] mb-2">Billing History</h3>
+                  <div className="border border-[#152B59]/10 rounded-md divide-y divide-[#152B59]/10">
+                    {[
+                      { date: 'May 15, 2023', amount: 'R599.00', status: 'Paid' },
+                      { date: 'May 15, 2022', amount: 'R499.00', status: 'Paid' }
+                    ].map((invoice, index) => (
+                      <div key={index} className="p-3 flex justify-between items-center">
+                        <div>
+                          <h4 className="text-sm font-medium">{invoice.date}</h4>
+                          <p className="text-xs text-[#333333]/70">Premium Membership</p>
+                        </div>
+                        <div className="text-right">
+                          <h4 className="text-sm font-medium">{invoice.amount}</h4>
+                          <p className="text-xs text-[#4CAF50]">{invoice.status}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="mt-6 border-t border-[#152B59]/10 pt-6">
+                  <div className="flex justify-between items-center">
+                    <Button variant="outline" size="sm" onClick={() => toast.success("Your invoice has been emailed to you", { description: "A copy of your latest invoice has been sent to your email address." })}>
+                      Email Invoice
+                    </Button>
+                    <Button variant="gold" size="sm">
+                      Upgrade Plan
+                    </Button>
                   </div>
                 </div>
               </CardContent>

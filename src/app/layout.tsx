@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import NavbarFooterWrapper from "@/components/navigation/NavbarFooterWrapper";
+import { Toaster } from "@/components/ui/sonner"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
         {children}
           </NavbarFooterWrapper>
         </div>
+        <Toaster />
       </body>
     </html>
   );

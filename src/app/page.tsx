@@ -1,6 +1,52 @@
-import Link from 'next/link'
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+// Mock credentials
+const MOCK_CREDENTIALS = {
+  email: 'player@example.com',
+  password: 'chess123'
+};
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    rememberMe: false
+  });
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
+
+    // Simulate API call delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Check credentials
+    if (formData.email === MOCK_CREDENTIALS.email && formData.password === MOCK_CREDENTIALS.password) {
+      // Mock successful login
+      router.push('/dashboard');
+    } else {
+      setError('Invalid email or password');
+    }
+
+    setIsLoading(false);
+  };
+
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center bg-[#F2F2F2]">
       <div className="w-full max-w-md">
@@ -15,7 +61,13 @@ export default function LoginPage() {
         </div>
 
         <div className="bg-white py-8 px-6 shadow-md rounded-lg">
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md text-sm">
+                {error}
+              </div>
+            )}
+            
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-[#333333]">
                 Email address
@@ -27,6 +79,8 @@ export default function LoginPage() {
                   type="email"
                   autoComplete="email"
                   required
+                  value={formData.email}
+                  onChange={handleChange}
                   className="w-full px-4 py-2 border border-[#152B59]/20 rounded-md focus:outline-none focus:ring-2 focus:ring-[#152B59]/50"
                   placeholder="Email address"
                 />
@@ -44,6 +98,8 @@ export default function LoginPage() {
                   type="password"
                   autoComplete="current-password"
                   required
+                  value={formData.password}
+                  onChange={handleChange}
                   className="w-full px-4 py-2 border border-[#152B59]/20 rounded-md focus:outline-none focus:ring-2 focus:ring-[#152B59]/50"
                   placeholder="Password"
                 />
@@ -54,8 +110,10 @@ export default function LoginPage() {
               <div className="flex items-center">
                 <input
                   id="remember-me"
-                  name="remember-me"
+                  name="rememberMe"
                   type="checkbox"
+                  checked={formData.rememberMe}
+                  onChange={handleChange}
                   className="h-4 w-4 text-[#152B59] border-[#152B59]/20 rounded"
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-[#333333]">
@@ -71,12 +129,13 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <Link
-                href="/dashboard"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#152B59] hover:bg-[#152B59]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#152B59]"
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#152B59] hover:bg-[#152B59]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#152B59] disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign in
-              </Link>
+                {isLoading ? 'Signing in...' : 'Sign in'}
+              </button>
             </div>
           </form>
 
@@ -119,5 +178,5 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
