@@ -317,7 +317,7 @@ export default function MatchesTab() {
               <Button variant="outline" onClick={() => setIsBookingModalOpen(false)}>
                 Cancel
               </Button>
-              <Button variant="navy" onClick={handleBookMatch}>
+              <Button variant="gold" onClick={handleBookMatch}>
                 Book Match
               </Button>
             </DialogFooter>
@@ -327,22 +327,22 @@ export default function MatchesTab() {
 
       {/* Match Tabs */}
       <Tabs defaultValue="upcoming" className="mb-6">
-        <TabsList className="w-full border border-[#152B59]/20 bg-[#152B59]/5 rounded-md">
+        <TabsList className="w-full border border-secondary bg-card rounded-md">
           <TabsTrigger 
             value="upcoming"
-            className="data-[state=active]:bg-white data-[state=active]:text-[#152B59] data-[state=active]:shadow-none"
+            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
           >
             Upcoming ({upcomingMatches.length})
           </TabsTrigger>
           <TabsTrigger 
             value="pending" 
-            className="data-[state=active]:bg-white data-[state=active]:text-[#152B59] data-[state=active]:shadow-none"
+            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
           >
             Pending ({pendingMatches.length})
           </TabsTrigger>
           <TabsTrigger 
             value="completed" 
-            className="data-[state=active]:bg-white data-[state=active]:text-[#152B59] data-[state=active]:shadow-none"
+            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
           >
             Completed ({completedMatches.length})
           </TabsTrigger>
@@ -353,33 +353,33 @@ export default function MatchesTab() {
           {upcomingMatches.length === 0 ? (
             <Card className="text-center">
               <CardContent className="px-3">
-                <p className="text-sm text-[#333333]">You don&apos;t have any upcoming matches scheduled.</p>
-                <Link href="/dashboard" className="mt-2 inline-block text-xs text-[#152B59] underline">Find a league to join</Link>
+                <p className="text-sm">You don&apos;t have any upcoming matches scheduled.</p>
+                <Link href="/dashboard" className="mt-2 inline-block text-xs text-primary underline">Find a league to join</Link>
               </CardContent>
             </Card>
           ) : (
             <div className="space-y-2">
               {upcomingMatches.map((match) => (
-                <Card key={match.id} className="border border-[#152B59]/10">
-                  <CardContent className="px-3">
+                <Card key={match.id}>
+                  <CardContent>
                     <div className="flex justify-between items-start mb-1">
                       <div className='gap-1'>
-                        <h3 className="font-medium text-[#152B59] text-sm">{match.opponent}</h3>
-                        <p className="text-xs text-[#333333]/70">Rating: {match.opponent_rating}</p>
+                        <h3 className="font-medium text-white text-sm">{match.opponent}</h3>
+                        <p className="text-xs text-muted-foreground">Rating: {match.opponent_rating}</p>
                       </div>
                       <div className="text-right">
                         <p className="text-xs font-medium">{formatDateAndTime(match.date)}</p>
-                        <p className="text-xs text-[#333333]/70">{match.venue || "Not specified"}</p>
+                        <p className="text-xs text-muted-foreground">{match.venue || "Not specified"}</p>
                       </div>
                     </div>
-                    <p className="text-xs text-[#333333]/70 mb-1">{match.league} - {match.division}</p>
+                    <p className="text-xs text-muted-foreground mb-1">{match.league} - {match.division}</p>
                     <div className="flex gap-2">
-                      <Button variant="navyOutline" size="sm" asChild>
+                      <Button variant="outline" size="sm" asChild>
                         <Link href={`/matches/${match.id}/reschedule`}>
                           Reschedule
                         </Link>
                       </Button>
-                      <Button variant="navy" size="sm" asChild>
+                      <Button variant="gold" size="sm" asChild>
                         <Link href={`/matches/${match.id}/report`}>
                           Report Result
                         </Link>
@@ -397,20 +397,20 @@ export default function MatchesTab() {
           {pendingMatches.length === 0 ? (
             <Card className="text-center">
               <CardContent className="px-3">
-                <p className="text-sm text-[#333333]">You don&apos;t have any matches requiring action.</p>
+                <p className="text-sm">You don&apos;t have any matches requiring action.</p>
               </CardContent>
             </Card>
           ) : (
             <div className="space-y-2">
               {pendingMatches.map((match) => (
                 <Card key={match.id} className="border-l-4 border-[#FFC107]">
-                  <CardContent className="px-3">
+                  <CardContent>
                     <div className="flex justify-between items-start mb-1">
                       <div>
-                        <h3 className="font-medium text-[#152B59] text-sm">
+                        <h3 className="font-medium text-white text-sm">
                           Match against {match.opponent}
                         </h3>
-                        <p className="text-xs text-[#333333]/70">{match.league} - {match.division}</p>
+                        <p className="text-xs text-white">{match.league} - {match.division}</p>
                       </div>
                       
                       <div>
@@ -423,7 +423,7 @@ export default function MatchesTab() {
                         )}
                         
                         {match.status === 'pending_confirmation' && (
-                          <Button variant="green" size="sm" asChild>
+                          <Button variant="gold" size="sm" asChild>
                             <Link href={`/matches/${match.id}/confirm`}>
                               Confirm
                             </Link>
@@ -431,7 +431,7 @@ export default function MatchesTab() {
                         )}
                         
                         {match.status === 'pending_result' && (
-                          <Button variant="green" size="sm" asChild>
+                          <Button variant="gold" size="sm" asChild>
                             <Link href={`/matches/${match.id}/confirm-result`}>
                               Confirm Result
                             </Link>
@@ -441,7 +441,7 @@ export default function MatchesTab() {
                     </div>
                     
                     {match.status === 'pending_confirmation' && (
-                      <div className="mt-1 text-xs text-[#333333]/70">
+                      <div className="mt-1 text-xs text-muted-foreground">
                         Proposed: {formatDateAndTime(match.date)} at {match.venue}
                       </div>
                     )}
@@ -457,27 +457,31 @@ export default function MatchesTab() {
           {completedMatches.length === 0 ? (
             <Card className="text-center">
               <CardContent className="px-3">
-                <p className="text-sm text-[#333333]">You don&apos;t have any completed matches yet.</p>
+                <p className="text-sm">You don&apos;t have any completed matches yet.</p>
               </CardContent>
             </Card>
           ) : (
             <div className="space-y-2">
               {completedMatches.map((match) => (
-                <Card key={match.id} className="border border-[#152B59]/10">
-                  <CardContent className="px-3">
+                <Card key={match.id}>
+                  <CardContent>
                     <div className="flex justify-between items-start mb-1">
                       <div>
-                        <h3 className="font-medium text-[#152B59] text-sm">{match.opponent}</h3>
-                        <p className="text-xs text-[#333333]/70">Rating: {match.opponent_rating}</p>
+                        <h3 className="font-medium text-primary text-sm">{match.opponent}</h3>
+                        <p className="text-xs text-muted-foreground">Rating: {match.opponent_rating}</p>
                       </div>
                       <div className="text-right">
-                        <span className={`font-medium text-sm ${match.result === '1-0' ? 'text-[#4CAF50]' : match.result === '0-1' ? 'text-[#E53935]' : 'text-[#FFC107]'}`}>
+                        <span className={`font-medium text-sm ${
+                          match.result === '1-0' ? 'text-[#4CAF50]' : 
+                          match.result === '0-1' ? 'text-[#E53935]' : 
+                          'text-[#FFC107]'
+                        }`}>
                           {match.result === '1-0' ? 'Won' : match.result === '0-1' ? 'Lost' : 'Draw'}
                         </span>
                       </div>
                     </div>
-                    <p className="text-xs text-[#333333]/70">{match.league} - {match.division}</p>
-                    <p className="text-xs text-[#333333]/70">{formatDateAndTime(match.date)} at {match.venue}</p>
+                    <p className="text-xs text-muted-foreground">{match.league} - {match.division}</p>
+                    <p className="text-xs text-muted-foreground">{formatDateAndTime(match.date)} at {match.venue}</p>
                   </CardContent>
                 </Card>
               ))}

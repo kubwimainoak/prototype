@@ -91,31 +91,31 @@ function ProfilePageContent() {
   };
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0f1f40]/10 via-[#152B59]/20 to-[#1a3573]/10 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-secondary/20 via-card/30 to-secondary/20 pb-20">
       <Toaster />
-      <div className="mb-4 w-full bg-[#152B59] p-4">
-        <h1 className="text-xl font-bold text-[#D6AD60]">Profile</h1>
-        <p className="text-xs text-[#D6AD60]/80 mt-0.5">Manage your chess player profile</p>
+      <div className="mb-4 w-full bg-card p-4">
+        <h1 className="text-xl font-bold text-white">Profile</h1>
+        <p className="text-xs text-white/80 mt-0.5">Manage your chess player profile</p>
       </div>
       <div className="container mx-auto max-w-6xl px-4">
         
         <Tabs defaultValue="general" className="mb-6">
-          <TabsList className="w-full border border-[#152B59]/20 bg-[#152B59]/5 rounded-md">
+          <TabsList className="w-full border border-secondary bg-card rounded-md">
             <TabsTrigger 
               value="general"
-              className="data-[state=active]:bg-white data-[state=active]:text-[#152B59] data-[state=active]:shadow-none"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
             >
               General
             </TabsTrigger>
             <TabsTrigger 
               value="schedule" 
-              className="data-[state=active]:bg-white data-[state=active]:text-[#152B59] data-[state=active]:shadow-none"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
             >
               Schedule
             </TabsTrigger>
             <TabsTrigger 
               value="subscription" 
-              className="data-[state=active]:bg-white data-[state=active]:text-[#152B59] data-[state=active]:shadow-none"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
             >
               Subscription
             </TabsTrigger>
@@ -123,147 +123,147 @@ function ProfilePageContent() {
           
           {/* General Tab */}
           <TabsContent value="general" className="mt-4">
-            <div className="bg-white rounded-lg shadow-md p-3 mb-3">
+            <div className="bg-card rounded-lg shadow-md p-3 mb-3">
               <div className="flex items-center mb-3">
-                <div className="w-16 h-16 bg-[#152B59]/10 rounded-full flex items-center justify-center mr-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#152B59]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-[#152B59]">Player Name</h2>
-                  <p className="text-xs text-[#333333]/80">Current rating: 1782</p>
+                  <h2 className="text-lg font-semibold">Player Name</h2>
+                  <p className="text-xs text-muted-foreground">Current rating: 1782</p>
                   <Button variant="outline" size="sm" className="mt-1">
                     Edit Profile
                   </Button>
                 </div>
               </div>
               
-              <div className="border-t border-[#152B59]/10 pt-2">
-                <h3 className="text-sm font-medium text-[#152B59] mb-2">Player Information</h3>
+              <div className="border-t border-secondary pt-2">
+                <h3 className="text-sm font-medium text-primary mb-2">Player Information</h3>
                 
                 <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                   <div>
-                    <p className="text-xs text-[#333333]/60">Email</p>
+                    <p className="text-xs text-muted-foreground">Email</p>
                     <p className="text-sm font-medium">player@example.com</p>
                   </div>
                   
                   <div>
-                    <p className="text-xs text-[#333333]/60">CHESSA ID</p>
+                    <p className="text-xs text-muted-foreground">CHESSA ID</p>
                     <p className="text-sm font-medium">SA10076542</p>
                   </div>
                   
                   <div>
-                    <p className="text-xs text-[#333333]/60">Club</p>
+                    <p className="text-xs text-muted-foreground">Club</p>
                     <p className="text-sm font-medium">Wanderers Chess Club</p>
                   </div>
                   
                   <div>
-                    <p className="text-xs text-[#333333]/60">Member Since</p>
+                    <p className="text-xs text-muted-foreground">Member Since</p>
                     <p className="text-sm font-medium">January 2023</p>
                   </div>
                   
                   <div>
-                    <p className="text-xs text-[#333333]/60">Address</p>
+                    <p className="text-xs text-muted-foreground">Address</p>
                     <p className="text-sm font-medium">123 Chess Street, Johannesburg, 2000</p>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="bg-white rounded-lg shadow-md p-3">
-              <h3 className="text-sm font-medium text-[#152B59] mb-2">Statistics</h3>
+            <div className="bg-card rounded-lg shadow-md p-3">
+              <h3 className="text-sm font-medium text-primary mb-2">Statistics</h3>
               
               {/* Overall Stats */}
               <div className="mb-3">
-                <h4 className="text-xs font-medium text-[#152B59] mb-2">Overall Performance</h4>
+                <h4 className="text-xs font-medium text-primary mb-2">Overall Performance</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Matches Played</p>
-                    <p className="text-lg font-semibold text-[#152B59]">47</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Matches Played</p>
+                    <p className="text-lg font-semibold">47</p>
                   </div>
                   
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Win Rate</p>
-                    <p className="text-lg font-semibold text-[#152B59]">68%</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Win Rate</p>
+                    <p className="text-lg font-semibold">68%</p>
                   </div>
                 </div>
               </div>
 
               {/* Tournament Stats */}
               <div className="mb-3">
-                <h4 className="text-xs font-medium text-[#152B59] mb-2">Tournament Statistics</h4>
+                <h4 className="text-xs font-medium text-primary mb-2">Tournament Statistics</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Tournaments</p>
-                    <p className="text-lg font-semibold text-[#152B59]">12</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Tournaments</p>
+                    <p className="text-lg font-semibold">12</p>
                   </div>
                   
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Tournament Wins</p>
-                    <p className="text-lg font-semibold text-[#152B59]">3</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Tournament Wins</p>
+                    <p className="text-lg font-semibold">3</p>
                   </div>
 
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Tournament Runner-up</p>
-                    <p className="text-lg font-semibold text-[#152B59]">2</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Tournament Runner-up</p>
+                    <p className="text-lg font-semibold">2</p>
                   </div>
 
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Tournament Rating</p>
-                    <p className="text-lg font-semibold text-[#152B59]">1820</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Tournament Rating</p>
+                    <p className="text-lg font-semibold">1820</p>
                   </div>
                 </div>
               </div>
 
               {/* Game Type Stats */}
               <div className="mb-3">
-                <h4 className="text-xs font-medium text-[#152B59] mb-2">Game Types</h4>
+                <h4 className="text-xs font-medium text-primary mb-2">Game Types</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Round Robin</p>
-                    <p className="text-lg font-semibold text-[#152B59]">8</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Round Robin</p>
+                    <p className="text-lg font-semibold">8</p>
                   </div>
                   
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Swiss System</p>
-                    <p className="text-lg font-semibold text-[#152B59]">4</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Swiss System</p>
+                    <p className="text-lg font-semibold">4</p>
                   </div>
 
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Knockout</p>
-                    <p className="text-lg font-semibold text-[#152B59]">3</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Knockout</p>
+                    <p className="text-lg font-semibold">3</p>
                   </div>
 
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Team Events</p>
-                    <p className="text-lg font-semibold text-[#152B59]">2</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Team Events</p>
+                    <p className="text-lg font-semibold">2</p>
                   </div>
                 </div>
               </div>
 
               {/* Match Results */}
               <div>
-                <h4 className="text-xs font-medium text-[#152B59] mb-2">Match Results</h4>
+                <h4 className="text-xs font-medium text-primary mb-2">Match Results</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Wins</p>
-                    <p className="text-lg font-semibold text-[#152B59]">32</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Wins</p>
+                    <p className="text-lg font-semibold">32</p>
                   </div>
                   
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Losses</p>
-                    <p className="text-lg font-semibold text-[#152B59]">12</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Losses</p>
+                    <p className="text-lg font-semibold">12</p>
                   </div>
 
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Draws</p>
-                    <p className="text-lg font-semibold text-[#152B59]">3</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Draws</p>
+                    <p className="text-lg font-semibold">3</p>
                   </div>
 
-                  <div className="p-2 bg-[#152B59]/5 rounded-md">
-                    <p className="text-xs text-[#333333]/60">Current Streak</p>
-                    <p className="text-lg font-semibold text-[#152B59]">4W</p>
+                  <div className="p-2 bg-secondary rounded-md">
+                    <p className="text-xs text-muted-foreground">Current Streak</p>
+                    <p className="text-lg font-semibold">4W</p>
                   </div>
                 </div>
               </div>
@@ -274,14 +274,14 @@ function ProfilePageContent() {
           <TabsContent value="schedule" className="mt-4">
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-bold text-[#152B59]">My Availability</CardTitle>
+                <CardTitle className="text-lg font-bold">My Availability</CardTitle>
                 <CardDescription>
                   Set your available time slots for match scheduling. Players with matching availability will be suggested to you for quick match booking.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="mb-4">
-                  <h3 className="text-sm font-medium text-[#152B59] mb-2">Weekly Schedule</h3>
+                  <h3 className="text-sm font-medium text-primary mb-2">Weekly Schedule</h3>
                   
                   {/* Calendar week view */}
                   <div className="grid grid-cols-7 gap-2 mb-4">
@@ -289,10 +289,10 @@ function ProfilePageContent() {
                       <div 
                         key={day.dateString} 
                         className={`
-                          p-2 text-center cursor-pointer rounded-md border
+                          p-2 text-center cursor-pointer rounded-md border border-secondary
                           ${selectedDay === day.dateString 
-                            ? 'bg-[#152B59] text-white border-[#152B59]' 
-                            : 'bg-white border-[#152B59]/20 hover:border-[#152B59]/50'
+                            ? 'bg-primary text-primary-foreground' 
+                            : 'bg-card hover:border-primary/50'
                           }
                         `}
                         onClick={() => setSelectedDay(day.dateString)}
@@ -306,7 +306,7 @@ function ProfilePageContent() {
                   
                   {selectedDay ? (
                     <>
-                      <h3 className="text-sm font-medium text-[#152B59] mb-2">
+                      <h3 className="text-sm font-medium text-primary mb-2">
                         Select available time slots for {new Date(selectedDay).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
                       </h3>
                       
@@ -318,8 +318,8 @@ function ProfilePageContent() {
                             className={`
                               p-2 text-center rounded-md border text-xs cursor-pointer
                               ${isTimeSlotSelected(slot) 
-                                ? 'bg-[#D6AD60] text-[#152B59] border-[#D6AD60] font-bold' 
-                                : 'bg-white border-[#152B59]/20 hover:border-[#152B59]/50'
+                                ? 'bg-primary text-primary-foreground border-primary font-bold' 
+                                : 'bg-card border-secondary hover:border-primary/50'
                               }
                             `}
                             onClick={() => toggleTimeSlot(slot)}
@@ -330,30 +330,30 @@ function ProfilePageContent() {
                       </div>
                       
                       <div className="mt-4 flex justify-end">
-                        <Button variant="navy" onClick={handleSaveAvailability}>
+                        <Button variant="gold" onClick={handleSaveAvailability}>
                           Save Availability
                         </Button>
                       </div>
                     </>
                   ) : (
-                    <div className="text-center py-4 text-[#333333]/70">
+                    <div className="text-center py-4 text-muted-foreground">
                       Select a day to set your available time slots
                     </div>
                   )}
                 </div>
                 
-                <div className="border-t border-[#152B59]/10 pt-4 mt-4">
-                  <h3 className="text-sm font-medium text-[#152B59] mb-2">Schedule Stats</h3>
+                <div className="border-t border-secondary pt-4 mt-4">
+                  <h3 className="text-sm font-medium text-primary mb-2">Schedule Stats</h3>
                   
                   <div className="grid grid-cols-2 gap-3">
-                    <div className="p-2 bg-[#152B59]/5 rounded-md">
-                      <p className="text-xs text-[#333333]/60">Available Time Slots</p>
-                      <p className="text-lg font-semibold text-[#152B59]">{selectedTimeSlots.length}</p>
+                    <div className="p-2 bg-secondary rounded-md">
+                      <p className="text-xs text-muted-foreground">Available Time Slots</p>
+                      <p className="text-lg font-semibold">{selectedTimeSlots.length}</p>
                     </div>
                     
-                    <div className="p-2 bg-[#152B59]/5 rounded-md">
-                      <p className="text-xs text-[#333333]/60">Available Days</p>
-                      <p className="text-lg font-semibold text-[#152B59]">
+                    <div className="p-2 bg-secondary rounded-md">
+                      <p className="text-xs text-muted-foreground">Available Days</p>
+                      <p className="text-lg font-semibold">
                         {new Set(selectedTimeSlots.map(slot => slot.split('-')[0])).size}
                       </p>
                     </div>
@@ -362,7 +362,7 @@ function ProfilePageContent() {
                   <div className="mt-4">
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Button variant="navyOutline" size="sm">View Potential Match Partners</Button>
+                        <Button variant="gold" size="sm">View Potential Match Partners</Button>
                       </DialogTrigger>
                       <DialogContent className="sm:max-w-[500px]">
                         <DialogHeader>
@@ -376,23 +376,23 @@ function ProfilePageContent() {
                           {/* Mock player data with matching availability */}
                           {selectedTimeSlots.length > 0 ? (
                             [1, 2, 3].map(id => (
-                              <div key={id} className="flex items-center justify-between p-2 border border-[#152B59]/10 rounded-md">
+                              <div key={id} className="flex items-center justify-between p-2 border border-secondary rounded-md">
                                 <div className="flex items-center">
-                                  <div className="w-8 h-8 bg-[#152B59]/10 rounded-full flex items-center justify-center mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#152B59]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                     </svg>
                                   </div>
                                   <div>
                                     <h4 className="text-sm font-medium">Player {id}</h4>
-                                    <p className="text-xs text-[#333333]/60">Rating: {1500 + id * 100}</p>
+                                    <p className="text-xs text-muted-foreground">Rating: {1500 + id * 100}</p>
                                   </div>
                                 </div>
-                                <Button variant="navy" size="sm">Book Match</Button>
+                                <Button variant="gold" size="sm">Book Match</Button>
                               </div>
                             ))
                           ) : (
-                            <p className="text-center py-4 text-[#333333]/70">
+                            <p className="text-center py-4 text-muted-foreground">
                               Set your availability to see potential match partners
                             </p>
                           )}
@@ -413,7 +413,7 @@ function ProfilePageContent() {
           <TabsContent value="subscription" className="mt-4">
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-bold text-[#152B59]">My Subscription</CardTitle>
+                <CardTitle className="text-lg font-bold">My Subscription</CardTitle>
                 <CardDescription>
                   Manage your subscription plan and payment details
                 </CardDescription>
@@ -421,20 +421,20 @@ function ProfilePageContent() {
               <CardContent>
                 {/* Current Plan Section */}
                 <div className="mb-6">
-                  <h3 className="text-sm font-medium text-[#152B59] mb-2">Current Plan</h3>
-                  <div className="bg-[#152B59]/5 p-3 rounded-md">
+                  <h3 className="text-sm font-medium text-primary mb-2">Current Plan</h3>
+                  <div className="bg-secondary p-3 rounded-md">
                     <div className="flex justify-between items-center">
                       <div>
-                        <h4 className="font-semibold text-[#152B59]">Premium Membership</h4>
-                        <p className="text-xs text-[#333333]/70 mt-0.5">Billed annually</p>
+                        <h4 className="font-semibold">Premium Membership</h4>
+                        <p className="text-xs text-muted-foreground mt-0.5">Billed annually</p>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm font-semibold text-[#152B59]">R599 / year</div>
+                        <div className="text-sm font-semibold">R599 / year</div>
                         <p className="text-xs text-[#4CAF50]">Active</p>
                       </div>
                     </div>
                     <div className="flex mt-3 text-xs">
-                      <span className="inline-flex items-center text-[#333333]/70">
+                      <span className="inline-flex items-center text-muted-foreground">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
@@ -446,7 +446,7 @@ function ProfilePageContent() {
                 
                 {/* Plan Benefits */}
                 <div className="mb-6">
-                  <h3 className="text-sm font-medium text-[#152B59] mb-2">Membership Benefits</h3>
+                  <h3 className="text-sm font-medium text-primary mb-2">Membership Benefits</h3>
                   <ul className="space-y-2">
                     {['Unlimited league entries', 'Priority tournament registration', 'No booking fees for matches', 'Advanced player statistics'].map((benefit, index) => (
                       <li key={index} className="flex text-sm items-start">
@@ -461,18 +461,18 @@ function ProfilePageContent() {
                 
                 {/* Payment Methods */}
                 <div className="mb-6">
-                  <h3 className="text-sm font-medium text-[#152B59] mb-2">Payment Method</h3>
-                  <div className="border border-[#152B59]/10 p-3 rounded-md">
+                  <h3 className="text-sm font-medium text-primary mb-2">Payment Method</h3>
+                  <div className="border border-secondary p-3 rounded-md">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center">
-                        <div className="w-10 h-6 bg-[#152B59]/10 rounded-md flex items-center justify-center mr-3">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#152B59]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div className="w-10 h-6 bg-secondary rounded-md flex items-center justify-center mr-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                           </svg>
                         </div>
                         <div>
                           <h4 className="text-sm font-medium">Visa ending in 4242</h4>
-                          <p className="text-xs text-[#333333]/70">Expires: 05/25</p>
+                          <p className="text-xs text-muted-foreground">Expires: 05/25</p>
                         </div>
                       </div>
                       <Button variant="outline" size="sm">
@@ -484,8 +484,8 @@ function ProfilePageContent() {
                 
                 {/* Billing History */}
                 <div>
-                  <h3 className="text-sm font-medium text-[#152B59] mb-2">Billing History</h3>
-                  <div className="border border-[#152B59]/10 rounded-md divide-y divide-[#152B59]/10">
+                  <h3 className="text-sm font-medium text-primary mb-2">Billing History</h3>
+                  <div className="border border-secondary rounded-md divide-y divide-secondary">
                     {[
                       { date: 'May 15, 2023', amount: 'R599.00', status: 'Paid' },
                       { date: 'May 15, 2022', amount: 'R499.00', status: 'Paid' }
@@ -493,7 +493,7 @@ function ProfilePageContent() {
                       <div key={index} className="p-3 flex justify-between items-center">
                         <div>
                           <h4 className="text-sm font-medium">{invoice.date}</h4>
-                          <p className="text-xs text-[#333333]/70">Premium Membership</p>
+                          <p className="text-xs text-muted-foreground">Premium Membership</p>
                         </div>
                         <div className="text-right">
                           <h4 className="text-sm font-medium">{invoice.amount}</h4>
@@ -504,7 +504,7 @@ function ProfilePageContent() {
                   </div>
                 </div>
                 
-                <div className="mt-6 border-t border-[#152B59]/10 pt-6">
+                <div className="mt-6 border-t border-secondary pt-6">
                   <div className="flex justify-between items-center">
                     <Button variant="outline" size="sm" onClick={() => toast.success("Your invoice has been emailed to you", { description: "A copy of your latest invoice has been sent to your email address." })}>
                       Email Invoice
@@ -526,8 +526,8 @@ function ProfilePageContent() {
 export default function ProfilePage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-[#0f1f40]/10 via-[#152B59]/20 to-[#1a3573]/10 pb-20 flex justify-center items-center">
-        <div className="text-[#152B59] text-lg font-medium">Loading profile...</div>
+      <div className="min-h-screen bg-gradient-to-br from-secondary/20 via-card/30 to-secondary/20 pb-20 flex justify-center items-center">
+        <div className="text-primary text-lg font-medium">Loading profile...</div>
       </div>
     }>
       <ProfilePageContent />

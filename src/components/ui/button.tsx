@@ -14,24 +14,24 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "border border-[#2D3748] bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary:
           "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         navy:
-          "bg-[#152B59] text-white shadow-xs hover:bg-[#152B59]/90",
+          "bg-[#171E2E] text-white shadow-xs hover:bg-[#171E2E]/90",
         navyOutline:
-          "border border-[#152B59] bg-white text-[#152B59] shadow-xs hover:bg-[#152B59]/5",
+          "border border-[#2D3748] bg-transparent text-white shadow-xs hover:bg-[#2D3748]/50",
         gold:
-          "bg-[#D6AD60] text-white shadow-xs hover:bg-[#D6AD60]/90",
+          "bg-[#D6AD60] text-[#1A202C] shadow-xs hover:bg-[#D6AD60]/90 font-semibold",
         goldOutline:
-          "border border-[#D6AD60] bg-white text-[#D6AD60] shadow-xs hover:bg-[#D6AD60]/5",
+          "border border-[#D6AD60] bg-transparent text-[#D6AD60] shadow-xs hover:bg-[#D6AD60]/10",
         green:
           "bg-[#4CAF50] text-white shadow-xs hover:bg-[#4CAF50]/90",
         greenOutline:
-          "border border-[#4CAF50] bg-white text-[#4CAF50] shadow-xs hover:bg-[#4CAF50]/5",
+          "border border-[#4CAF50] bg-transparent text-[#4CAF50] shadow-xs hover:bg-[#4CAF50]/10",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

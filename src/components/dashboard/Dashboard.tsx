@@ -41,15 +41,12 @@ function DashboardContent() {
   const { title, subtitle } = getTabHeader();
 
   return (
-    <div className="min-h-[100vh] bg-gradient-to-br from-[#0f1f40]/10 via-[#152B59]/20 to-[#1a3573]/10">
-      <div className="mb-4 w-full bg-[#152B59] p-4">
-          <h1 className="text-xl font-bold text-[#D6AD60]">{title}</h1>
-          <p className="text-xs text-[#D6AD60]/80 mt-0.5">{subtitle}</p>
+    <div className="min-h-[100vh] bg-gradient-to-br from-secondary/20 via-card/30 to-secondary/20 pb-20">
+      <div className="mb-4 w-full bg-card p-4">
+          <h1 className="text-xl font-bold text-white">{title}</h1>
+          <p className="text-xs text-white/80 mt-0.5">{subtitle}</p>
         </div>
       <div className="container mx-auto max-w-6xl px-4">
-        {/* Header */}
-        
-
         {/* Tab Content */}
         <div className='pb-4'>
           {activeTab === 'leagues' && <LeaguesTab />}
