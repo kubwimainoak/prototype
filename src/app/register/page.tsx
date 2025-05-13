@@ -53,7 +53,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md px-4">
         <div className="text-center mb-4">
           <div className="flex justify-center mb-2">
             <div className="relative w-10 h-10 bg-primary rounded-md flex items-center justify-center">
