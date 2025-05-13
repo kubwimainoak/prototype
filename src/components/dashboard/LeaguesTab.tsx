@@ -265,7 +265,7 @@ export default function LeaguesTab() {
             View Details
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[600px] max-h-[85vh] overflow-y-auto">
+        <DialogContent className="sm:max-w-[600px] max-h-[85vh] overflow-y-auto p-2 sm:p-4">
           <DialogHeader>
             <DialogTitle className="text-xl font-bold text-white">{league.name}</DialogTitle>
             <DialogDescription className="text-muted-foreground">{league.description}</DialogDescription>
@@ -273,27 +273,27 @@ export default function LeaguesTab() {
           
           <Tabs defaultValue="info" className="mt-4">
             <TabsList className="w-full border border-secondary bg-card rounded-md">
-              <TabsTrigger 
+              <TabsTrigger
                 value="info"
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
+                className=" sm:text-[10px] xs:text-[8px] data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
               >
                 Information
               </TabsTrigger>
               <TabsTrigger 
                 value="divisions" 
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
+                className=" sm:text-[10px] xs:text-[8px]  data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
               >
                 Divisions
               </TabsTrigger>
               <TabsTrigger 
                 value="schedule" 
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
+                className=" sm:text-[10px] xs:text-[8px] data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
               >
                 Schedule
               </TabsTrigger>
               <TabsTrigger 
                 value="leaderboard" 
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
+                className="sm:text-[10px] xs:text-[8px] data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
               >
                 Leaderboard
               </TabsTrigger>

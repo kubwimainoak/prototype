@@ -4,18 +4,16 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-// Mock credentials
-const MOCK_CREDENTIALS = {
-  email: 'player@example.com',
-  password: 'chess123'
-};
-
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
+    chessaId: '',
+    fideId: '',
     password: '',
-    rememberMe: false
+    confirmPassword: '',
+    agreeToTerms: false
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -33,18 +31,24 @@ export default function LoginPage() {
     setError('');
     setIsLoading(true);
 
+    // Basic validation
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      setIsLoading(false);
+      return;
+    }
+
+    if (!formData.agreeToTerms) {
+      setError('You must agree to the terms and conditions');
+      setIsLoading(false);
+      return;
+    }
+
     // Simulate API call delay
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    // Check credentials
-    if (formData.email === MOCK_CREDENTIALS.email && formData.password === MOCK_CREDENTIALS.password) {
-      // Mock successful login
-      router.push('/dashboard');
-    } else {
-      setError('Invalid email or password');
-    }
-
-    setIsLoading(false);
+    // Mock successful registration
+    router.push('/dashboard');
   };
 
   return (
@@ -56,8 +60,8 @@ export default function LoginPage() {
               <span className="text-[#171e2e] font-bold text-3xl">♞</span>
             </div>
           </div>
-          <h1 className="text-2xl font-bold text-white">Chess League</h1>
-          <p className="mt-1 text-xs text-muted-foreground">Sign in to manage your chess leagues and tournaments</p>
+          <h1 className="text-2xl font-bold text-white">Create Account</h1>
+          <p className="mt-1 text-xs text-muted-foreground">Join Chess League to start playing and competing</p>
         </div>
 
         <div className="bg-card py-4 px-3 shadow-md rounded-lg border border-secondary max-h-[80vh] overflow-y-auto">
@@ -68,6 +72,24 @@ export default function LoginPage() {
               </div>
             )}
             
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-white">
+                Full Name
+              </label>
+              <div className="mt-1">
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 text-white bg-secondary/30 border border-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  placeholder="John Doe"
+                />
+              </div>
+            </div>
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-white">
                 Email address
@@ -82,7 +104,41 @@ export default function LoginPage() {
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full px-4 py-2 text-white bg-secondary/30 border border-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
-                  placeholder="Email address"
+                  placeholder="you@example.com"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="chessaId" className="block text-sm font-medium text-white">
+                CHESSA ID <span className="text-xs text-muted-foreground">(optional)</span>
+              </label>
+              <div className="mt-1">
+                <input
+                  id="chessaId"
+                  name="chessaId"
+                  type="text"
+                  value={formData.chessaId}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 text-white bg-secondary/30 border border-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  placeholder="e.g. 123456"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="fideId" className="block text-sm font-medium text-white">
+                FIDE ID <span className="text-xs text-muted-foreground">(optional)</span>
+              </label>
+              <div className="mt-1">
+                <input
+                  id="fideId"
+                  name="fideId"
+                  type="text"
+                  value={formData.fideId}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 text-white bg-secondary/30 border border-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  placeholder="e.g. 8700000"
                 />
               </div>
             </div>
@@ -96,36 +152,50 @@ export default function LoginPage() {
                   id="password"
                   name="password"
                   type="password"
-                  autoComplete="current-password"
+                  autoComplete="new-password"
                   required
                   value={formData.password}
                   onChange={handleChange}
                   className="w-full px-4 py-2 text-white bg-secondary/30 border border-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
-                  placeholder="Password"
+                  placeholder="••••••••"
                 />
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
+            <div>
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-white">
+                Confirm Password
+              </label>
+              <div className="mt-1">
                 <input
-                  id="remember-me"
-                  name="rememberMe"
-                  type="checkbox"
-                  checked={formData.rememberMe}
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  autoComplete="new-password"
+                  required
+                  value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="h-4 w-4 text-primary border-secondary rounded bg-secondary/30"
+                  className="w-full px-4 py-2 text-white bg-secondary/30 border border-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  placeholder="••••••••"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-muted-foreground">
-                  Remember me
-                </label>
               </div>
+            </div>
 
-              <div className="text-sm">
-                <a href="#" className="font-medium text-primary hover:text-primary/80">
-                  Forgot your password?
+            <div className="flex items-center">
+              <input
+                id="agreeToTerms"
+                name="agreeToTerms"
+                type="checkbox"
+                checked={formData.agreeToTerms}
+                onChange={handleChange}
+                className="h-4 w-4 text-primary border-secondary rounded bg-secondary/30"
+              />
+              <label htmlFor="agreeToTerms" className="ml-2 block text-sm text-muted-foreground">
+                I agree to the{' '}
+                <a href="#" className="text-primary hover:text-primary/80">
+                  Terms and Conditions
                 </a>
-              </div>
+              </label>
             </div>
 
             <div>
@@ -134,7 +204,7 @@ export default function LoginPage() {
                 disabled={isLoading}
                 className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isLoading ? 'Signing in...' : 'Sign in'}
+                {isLoading ? 'Creating account...' : 'Create account'}
               </button>
             </div>
           </form>
@@ -172,11 +242,11 @@ export default function LoginPage() {
 
           <div className="mt-6 text-center">
             <p className="text-sm text-muted-foreground">
-              Don&apos;t have an account? <Link href="/register" className="text-primary hover:text-primary/80">Register here</Link>
+              Already have an account? <Link href="/" className="text-primary hover:text-primary/80">Sign in</Link>
             </p>
           </div>
         </div>
       </div>
     </div>
   );
-}
+} 
